@@ -1,0 +1,33 @@
+id: L2
+title: 给抖音链接让Agent复刻视频
+goal: 测试仅凭参考视频拆出逐镜规格，并用代码复刻日历概念片。
+source:
+  document: https://flova-team.feishu.cn/docx/Ls5Gdp6SworOVoxUQXvcQPMInYd
+  case: L2
+  prompt_kind: adapted
+preparation:
+  status: prepared
+  required_files: []
+  required_skills: []
+  pending: [正式测试时验证链接访问并缓存原片, 从实际原片确认分辨率和帧率]
+inputs:
+  refs: []
+  video_url: https://www.douyin.com/video/7685931514080595200
+target:
+  video: null
+  reference_links: [https://www.douyin.com/video/7685931514080595200]
+  evaluator_note: 原片15秒，一镜到底；全年日历格推近一天，空隙弹出黄色Clear.，拉回全年后黄格拼出CLEARING。
+prompt_file: prompt.md
+output_spec:
+  kind: video
+  duration_s: 15
+  resolution: null
+  fps: null
+  format: mp4
+  audio: 无声音
+protocol:
+  mode: multi_turn
+  checkpoints: [看视频并拆逐镜规格, 用户确认后代码实现, 同时间点并排抽帧对照]
+evals:
+  must_have: [先真实获取视频再拆解, 逐镜时间画面文字镜头转场配色, 一镜到底, 日历与Clear.及CLEARING还原, 原片成片同步抽帧, 代码绘制且无声音]
+  must_not: [提前向模型泄露evaluator_note, 调用生图或视频生成模型, 未确认就复刻, 声称访问了未能访问的链接]

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """调用火山方舟 Ark Chat Completions（Doubao-Seed-Evolving），产物落到指定 run 目录。
 
-只依赖标准库。密钥从 models/<model>/.env 或环境变量读取，不写进代码。
+单轮文本/图片接口客户端，不包含多轮 Agent、视频获取或渲染。
+密钥从 models/.env 或环境变量读取，不写进代码。
 
 用法：
     python3 scripts/ark_client.py --run 20261029-140000_seed-evolving_case-001 \
         --prompt-file cases/case-001/prompt.md
-    python3 scripts/ark_client.py --run <run_id> --prompt "写一段 p5.js 动画" --image assets/refs/images/a.png
+    python3 scripts/ark_client.py --run <run_id> --prompt "写一段 p5.js 动画" --image assets/refs/a.png
 """
 from __future__ import annotations
 

@@ -1,0 +1,36 @@
+id: T2
+title: 用七段式中文模板做竖屏教程
+goal: 测试中文长模板、缺项询问、分镜与静帧确认、确定性画面及代码合成音频。
+source:
+  document: https://flova-team.feishu.cn/docx/Ls5Gdp6SworOVoxUQXvcQPMInYd
+  case: T2
+  prompt_kind: adapted_preserving_truncation
+  completeness: 原作者部分句子本来就有画面截断标记；保留标记，不虚构缺失原句。
+preparation:
+  status: needs_dependencies
+  required_files: []
+  required_skills: []
+  pending: [确认思源黑体字体, 准备numpy和scipy, 后续生成工程时固定Playwright及浏览器版本]
+inputs:
+  refs: []
+  topic: 在Flova里一键装好灵感库里的skill
+  takeaway: 看到的skill点一下就装好
+target:
+  video: null
+  reference_links: [https://www.douyin.com/video/7695336139233758506]
+prompt_file: prompt.md
+output_spec:
+  kind: video
+  duration_s: 30
+  resolution: 1080x1920
+  fps: 30
+  format: mp4
+  color: "#2F6BFF"
+  font: 思源黑体
+  audio: 代码合成配乐，无配音
+protocol:
+  mode: multi_turn
+  checkpoints: [确认输入与截断处处理, 分镜表, 3张关键帧, 完整片]
+evals:
+  must_have: [七段式结构, 缺项先问不编造, 每镜头只讲一件事, 文字至少停留2.5秒, window.render(t)确定性, 固定随机种子, 截图前字体就绪, 音频波形检查, 900帧]
+  must_not: [擅自补写截断原句, 所有元素同时淡入, 默认居中大字渐变模板, 满屏小字, 用未加载字体截图, 添加配音]

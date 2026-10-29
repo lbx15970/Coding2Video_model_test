@@ -1,0 +1,40 @@
+id: T1
+title: 拆成6个小任务做一支功能教程
+goal: 测试分文件工作流、事实来源、故事先行和只修改一行的定向迭代。
+source:
+  document: https://flova-team.feishu.cn/docx/Ls5Gdp6SworOVoxUQXvcQPMInYd
+  case: T1
+  prompt_kind: adapted
+preparation:
+  status: needs_inputs_and_skill_source
+  required_files:
+    - {path: assets/targets/T1_reference.mp4, purpose: 功能教程参考片}
+  required_skills: [remotion-best-practices, motion-design-skill]
+  pending: [补充参考片, 确认文档所指motion-design-skill的确切仓库, 核对业务数字和可追溯来源]
+inputs:
+  refs: []
+  topic: Flova灵感库怎么用
+  supplied_facts:
+    methods: 24
+    categories: 8
+    steps: [看效果视频, 点在Flova里用, 回答Agent的问题后确认]
+    installed_label: 已安装
+  fact_source: 场景文档提供；尚未现场验证产品数据。
+target:
+  video: assets/targets/T1_reference.mp4
+  reference_links: [https://x.com/francescoinweb3/status/2111393917899808880]
+prompt_file: prompt.md
+output_spec:
+  kind: video
+  duration_s: 30
+  resolution: 1080x1350
+  fps: null
+  format: mp4
+protocol:
+  mode: multi_turn
+  checkpoints: [spec.md, data.json, story.md, Scene.tsx, timing.ts, 静帧确认后交付视频]
+  revision_request: 标题晚了一拍
+  revision_scope: timing.ts中的对应时间配置行
+evals:
+  must_have: [每步只产出对应文件, 下一步读取上一文件, 数字旁有真实来源, story确认后才写动画, 局部修改只改对应配置, 交付前静帧检查]
+  must_not: [一次做完整视频, 编造来源, 将文档给定数字冒充现场调研, 修改意见导致整支重做, 重复安装已安装skill]

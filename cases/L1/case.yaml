@@ -1,0 +1,31 @@
+id: L1
+title: 给抖音链接让Agent看视频学会方法
+goal: 测试视频内容获取、屏幕prompt提取、方法学习和指令转写，交付学习卡而非视频。
+source:
+  document: https://flova-team.feishu.cn/docx/Ls5Gdp6SworOVoxUQXvcQPMInYd
+  case: L1
+  prompt_kind: adapted
+preparation:
+  status: prepared
+  required_files: []
+  required_skills: []
+  pending: [链接访问能力在正式测试时验证, 文档提及的人工学习报告未提供，暂用K1六步要求作局部对照]
+inputs:
+  refs: []
+  video_url: https://www.douyin.com/video/7655995367103679753
+target:
+  video: null
+  reference_links: [https://www.douyin.com/video/7655995367103679753]
+prompt_file: prompt.md
+output_spec:
+  kind: report
+  duration_s: null
+  resolution: null
+  fps: null
+  format: markdown
+protocol:
+  mode: single_turn
+  checkpoints: [学习卡与可直接使用的Agent指令]
+evals:
+  must_have: [真的获取视频内容, 作者顺序和屏幕提示词保留, 不清晰处标注, 七项学习卡, 方法完整性与可行性判断, 1到3个具体试法, 停顿确认点]
+  must_not: [未看视频却声称已学习, 将网页标题当视频内容, 编造视频未提供的模型或参数, 运行学到的生成任务]

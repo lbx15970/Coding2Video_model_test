@@ -2,8 +2,8 @@
 """新建一次测试任务：生成带时间戳的 run 目录并自动登记到 runs/RUNS.md。
 
 用法：
-    python3 scripts/new_run.py --model seed-evolving --case case-001 --note "首测：柱状图动画"
-    python3 scripts/new_run.py --model claude-opus-5.5 --case case-001 --refs assets/refs/images/a.png
+    python3 scripts/new_run.py --model seed-evolving --case K1 --note "信息卡包装首测"
+    python3 scripts/new_run.py --model claude-opus-5.5 --case K1 --refs assets/refs/K1_speech.mp4
 """
 from __future__ import annotations
 
@@ -26,8 +26,8 @@ def slug(text: str) -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", required=True, help="模型 key，与 models/registry.yaml 一致")
-    ap.add_argument("--case", required=True, help="用例 id，如 case-001")
+    ap.add_argument("--model", required=True, help="模型 key，与 models/models.yaml 一致")
+    ap.add_argument("--case", required=True, help="用例 id，如 K1、T2、L1；运行前先读用例准备清单")
     ap.add_argument("--note", default="", help="任务说明")
     ap.add_argument("--refs", default="", help="输入素材相对路径，逗号分隔")
     ap.add_argument("--params", default="", help='覆盖参数 JSON，如 \'{"temperature":0.3}\'')
@@ -76,8 +76,7 @@ def main() -> int:
 
     print(f"run_id: {run_id}")
     print(f"目录:   outputs/{run_id}/")
-    print("下一步: python3 scripts/ark_client.py --run "
-          f"{run_id} --prompt-file cases/{args.case}/prompt.md")
+    print(f"下一步: 读取 cases/{args.case}/prompt.md，在 Agent 测试环境中按确认点执行。")
     return 0
 
 

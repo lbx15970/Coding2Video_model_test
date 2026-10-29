@@ -1,0 +1,34 @@
+id: K1
+title: 给口播加信息卡包装
+goal: 测试参考风格拆解、口播信息提炼、六步协作和局部修改能力。
+source:
+  document: https://flova-team.feishu.cn/docx/Ls5Gdp6SworOVoxUQXvcQPMInYd
+  case: K1
+  prompt_kind: adapted
+preparation:
+  status: needs_inputs
+  required_files:
+    - {path: assets/refs/K1_speech.mp4, purpose: 客户横版口播原片}
+    - {path: assets/targets/K1_reference.mp4, purpose: 信息卡风格目标视频}
+  required_skills: []
+  pending: [补充横版口播和实际目标视频, 从输入确认完整片长和帧率]
+inputs:
+  refs: [assets/refs/K1_speech.mp4]
+target:
+  video: assets/targets/K1_reference.mp4
+  reference_links: [https://www.douyin.com/video/7655995367103679753]
+prompt_file: prompt.md
+output_spec:
+  kind: video
+  duration_s: null
+  resolution: 1920x1080
+  fps: null
+  format: mp4
+  audio: 保留原声
+  preview_duration_s: [15, 25]
+protocol:
+  mode: multi_turn
+  checkpoints: [包装规则, 内容拆解, 3到5张关键帧, 15到25秒样片, 定向修改, 完整片与抽帧质检]
+evals:
+  must_have: [人物脸部中轴无遮挡, 信息卡提炼逻辑而非复述字幕, 数字与图表有动画, 六步逐步等待确认, 修改前后可对照]
+  must_not: [提前渲染整片, 所有元素同时出现, 第五步修改未要求的内容, 添加底部字幕]

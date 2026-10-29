@@ -1,0 +1,34 @@
+id: P2
+title: 参考片换品牌重做12秒宣传短片
+goal: 测试长逐帧规格遵循、参考还原和品牌替换。
+source:
+  document: https://flova-team.feishu.cn/docx/Ls5Gdp6SworOVoxUQXvcQPMInYd
+  case: P2
+  prompt_kind: outline_only
+  completeness: 仅确认目录中的场景摘要；约1万字逐帧规格和该case正文尚未完整取得。
+preparation:
+  status: needs_source_and_inputs
+  required_files:
+    - {path: assets/targets/P2_reference.mp4, purpose: 要复刻的实际参考短片}
+    - {path: assets/refs/P2_frame_spec.txt, purpose: 文档原版完整逐帧规格}
+    - {path: assets/refs/P2_brand.json, purpose: 新品牌名称、颜色、文案及logo文件路径}
+  required_skills: []
+  pending: [完整原prompt和逐帧规格, 参考片, 新品牌资料, 分辨率与帧率]
+inputs:
+  refs: [assets/refs/P2_frame_spec.txt, assets/refs/P2_brand.json]
+target:
+  video: assets/targets/P2_reference.mp4
+  reference_links: []
+prompt_file: prompt.md
+output_spec:
+  kind: video
+  duration_s: 12
+  resolution: null
+  fps: null
+  format: mp4
+protocol:
+  mode: multi_turn
+  checkpoints: [完整规格与品牌替换映射, 关键帧确认, 样片确认, 完整片与逐项规格对照]
+evals:
+  must_have: [逐帧规格可追溯, 品牌替换完整, 12秒时长, 对照规格逐项验收]
+  must_not: [用摘要替代约1万字原规格, 编造缺失镜头与参数, 残留旧品牌]

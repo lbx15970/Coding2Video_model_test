@@ -1,0 +1,36 @@
+id: P3
+title: 给一个网站链接直接做宣传片
+goal: 测试真实网站取材、连续3D镜头、页面元素立起和品牌片尾。
+source:
+  document: https://flova-team.feishu.cn/docx/Ls5Gdp6SworOVoxUQXvcQPMInYd
+  case: P3
+  prompt_kind: adapted
+  completeness: 已读取输入和direction；长prompt后续细项未完整取得。
+preparation:
+  status: needs_source_details
+  required_files: []
+  required_skills: []
+  pending: [补齐原prompt未读细项, 后续测试时验证网站可访问性和真实截图, 确认Geist与Instrument Serif字体]
+inputs:
+  refs: []
+  website_url: https://flova.app
+  brand_name: Flova
+  closing_line: See it.
+  italic_tail: make it in Flova.
+target:
+  video: null
+  reference_links: [https://x.com/twoclipping/status/2110329502676951367]
+prompt_file: prompt.md
+output_spec:
+  kind: video
+  duration_s: 14.5
+  resolution: 1440x1152
+  fps: 60
+  format: mp4
+  audio: 无配乐
+protocol:
+  mode: multi_turn
+  checkpoints: [真实页面与素材清单, 镜头路径和关键帧, 完整片]
+evals:
+  must_have: [实际访问并使用真实页面, 页面贴地连续飞越, 元素立起与软阴影, 顶视整页后俯冲片尾, 指定品牌文案, 870帧]
+  must_not: [编造网页截图, 使用占位页面, 一镜到底中出现硬切, 添加配乐, 偷改未提供的网站内容]

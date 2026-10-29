@@ -1,0 +1,34 @@
+id: K3
+title: 口播字幕质检
+goal: 测试15项字幕规则的检出、时间码报告和确认后的选择性修改。
+source:
+  document: https://flova-team.feishu.cn/docx/Ls5Gdp6SworOVoxUQXvcQPMInYd
+  case: K3
+  prompt_kind: adapted
+preparation:
+  status: needs_inputs
+  required_files:
+    - {path: assets/refs/K3_speech.mp4, purpose: 与字幕对应的横屏口播}
+    - {path: assets/refs/K3_subtitles_bad.srt, purpose: 已准备的结构错误字幕样本；实际测试应匹配口播}
+  required_skills: []
+  pending: [结构样本无配套音频, 补充匹配的口播和字幕, 剪辑点附近规则需要剪辑点时间线]
+inputs:
+  refs: [assets/refs/K3_speech.mp4, assets/refs/K3_subtitles_bad.srt]
+target:
+  video: null
+  reference_links: [https://www.douyin.com/video/7683481509000449316]
+prompt_file: prompt.md
+output_spec:
+  kind: report
+  duration_s: null
+  resolution: null
+  fps: null
+  format: json+srt
+protocol:
+  mode: multi_turn
+  checkpoints: [含时间码的红黄问题报告, 用户确认, 仅修改红色并附修改记录]
+evals:
+  oracle: assets/refs/K3_expected_issues.json
+  oracle_visibility: evaluator_only
+  must_have: [覆盖9项红色与6项黄色规则, 标出规则和时间码及证据, 缺音频或剪辑点时标无法判断, 修改前后可对照]
+  must_not: [未确认就修改, 修改黄色问题, 向被测模型提供标准答案, 用纯字幕结构推断所有语音问题]

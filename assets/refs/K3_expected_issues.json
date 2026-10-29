@@ -1,0 +1,29 @@
+{
+  "purpose": "人工构造的字幕结构测试答案，仅评测方可见；不是语音识别结果，也没有配套口播。",
+  "fixture": "assets/refs/K3_subtitles_bad.srt",
+  "fps_for_fixture": 30,
+  "counting": "读速使用包含标点但不含空白的字符数；长度规则去除标点和空白。正式测试如采用不同口径，先固定并记录。",
+  "red_structural": [
+    {"rule": "empty", "subtitle_ids": [1]},
+    {"rule": "trailing_space", "subtitle_ids": [2]},
+    {"rule": "adjacent_exact_duplicate", "subtitle_ids": [3, 4]},
+    {"rule": "duration_lt_0_5s", "subtitle_ids": [5, 10]},
+    {"rule": "overlap", "subtitle_ids": [4, 5]}
+  ],
+  "yellow_structural": [
+    {"rule": "chars_per_second_gt_11", "subtitle_ids": [5, 7]},
+    {"rule": "duration_gt_6s", "subtitle_ids": [6]},
+    {"rule": "non_punctuation_chars_gt_24", "subtitle_ids": [6]},
+    {"rule": "gap_1frame_to_0_5s", "pairs": [[5, 6], [6, 7], [7, 8], [9, 10]]}
+  ],
+  "requires_reference_text": [
+    {"rule": "split_english_word", "subtitle_ids": [8, 9], "intended_word": "transformer", "note": "结构上仅能报疑似；确认修复需对应原文或语音。"}
+  ],
+  "not_evaluable_without_media": [
+    "字幕与口播明显不匹配",
+    "无语音却有字幕",
+    "有语音却无字幕",
+    "同音字与专有名词小差别",
+    "距剪辑点1到6帧"
+  ]
+}

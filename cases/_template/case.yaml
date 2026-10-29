@@ -1,23 +1,31 @@
-# 用例模板：复制 cases/_template 为 cases/<case-id>/ 后填写
-id: case-001
-title: 占位标题
-goal: 这条用例验证什么
-source: 客户提供 / 自造
-
+# 复制本目录为 cases/<case-id>/；素材统一放 assets/，不再建用例内的素材子目录。
+id: case-011
+title: 待填写
+goal: 待填写
+source:
+  document: null
+  case: null
+  prompt_kind: adapted
+preparation:
+  status: needs_inputs
+  required_files: []               # [{path: assets/refs/<id>_xxx, purpose: 用途}]
+  required_skills: []              # 对应 skills/registry.yaml 中的 name
+  pending: []                      # 缺少的素材、规格或依赖，不能用假素材替代
 inputs:
-  refs: []                        # cases/<id>/inputs/ 下的文件，或用 assets/refs/ 的公共素材
+  refs: []
 target:
-  video: cases/<id>/targets/xxx.mp4   # 或 assets/targets/xxx.mp4
-  why_good: 目标好在哪（构图/节奏/转场/信息密度）
-
+  video: null
+  reference_links: []              # 教学原帖不等于客户口播或优秀目标视频
 prompt_file: prompt.md
-
 output_spec:
-  duration_s: 15
-  resolution: 1080x1920
-  fps: 30
+  kind: video                     # video / report
+  duration_s: null                 # 沿用场景要求；null 表示待确认或随输入确定
+  resolution: null
+  fps: null
   format: mp4
-
+protocol:
+  mode: multi_turn                # single_turn / multi_turn
+  checkpoints: []
 evals:
-  must_have: []                   # 必须出现的信息点
-  must_not: []                    # 禁止出现（水印/错字/版权素材）
+  must_have: []
+  must_not: []

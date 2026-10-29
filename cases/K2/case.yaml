@@ -1,0 +1,35 @@
+id: K2
+title: 给口播配讲解动画
+goal: 测试按指定 skill 实现全屏讲解动画、关键词时序与字幕同步。
+source:
+  document: https://flova-team.feishu.cn/docx/Ls5Gdp6SworOVoxUQXvcQPMInYd
+  case: K2
+  prompt_kind: adapted
+preparation:
+  status: needs_inputs
+  required_files:
+    - {path: assets/refs/K2_speech.wav, purpose: 15到60秒中文口播}
+    - {path: assets/refs/K2_transcript.txt, purpose: 对应逐字稿}
+  required_skills: [dashi-animationstyle]
+  pending: [补充口播与逐字稿, 精确字级对齐需确认 ASR 或强制对齐工具]
+inputs:
+  refs: [assets/refs/K2_speech.wav, assets/refs/K2_transcript.txt]
+target:
+  video: null
+  reference_links: [https://www.douyin.com/video/7696944600073768230]
+  reference_note: 教学视频中的 dashi 样片从 1分16秒开始；不是待配动画的客户口播。
+prompt_file: prompt.md
+output_spec:
+  kind: video
+  duration_s: null
+  resolution: 1920x1080
+  fps: 30
+  format: mp4
+  audio: 保留口播并带字幕
+  style: 立体卡通
+protocol:
+  mode: multi_turn
+  checkpoints: [方案与分镜, 3张静帧, 完整片及关键词同步检查]
+evals:
+  must_have: [明确使用固定版本 dashi-animationstyle, 使用第1种立体卡通风格, 时长跟随口播, 字幕和关键词动作对齐, 画面由代码生成]
+  must_not: [调用生图模型, 以均匀分配的字级时间冒充精确识别, 使用教学视频冒充客户输入]

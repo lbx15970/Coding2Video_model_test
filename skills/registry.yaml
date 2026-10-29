@@ -1,13 +1,48 @@
-# 已引入的互联网 Skill（一个文件登记完即可）
-# 新增一条后把代码放 skills/<name>/，并更新 README 的目录树
+# 本项目技能登记。大体积上游源码安装在本机全局目录，仓库只保留版本和入口。
+# 另一台机器需取相同commit并准备对应skill文件夹；不自动更新上游版本。
 version: 1
-updated_at: 2026-10-29
-skills: []
-# 示例：
-# - name: manim-video
-#   source: https://github.com/xxx/manim-video-skill   # 必须可回溯
-#   version: v0.3.1                                    # 锁版本，避免上游漂移
-#   license: MIT
-#   entry: skills/manim-video/SKILL.md
-#   used_in_cases: [case-001]
-#   risk: 联网下载依赖；不外发客户素材
+updated_at: "2026-10-29"
+skills:
+  - name: dashi-animationstyle
+    source: https://github.com/chuspeeism/dashi-animationstyle
+    source_subdir: .
+    commit: aa620f3b859aa5d191b783b2eb0fb59263731c76
+    version: v1.3
+    license: MIT
+    media_license_note: 示例口播不属于MIT许可，仅供试用技能；不能混作客户素材。
+    entry: "~/.trae-cn/skills/dashi-animationstyle/SKILL.md"
+    install_scope: global_cn
+    status: installed_source_not_runtime_verified
+    validation: 79个源文件的路径和SHA256与固定版本源码一致；未执行任何脚本。
+    used_in_cases: [K2]
+    selected_style: 立体卡通
+    requirements: [macOS, Node>=22, ffmpeg, Chrome, 中文字体]
+    optional: whisper-cli；无此工具时用逐字稿和静音检测，必须报告时间估计误差。
+    execution_rule: 正式测试显式读取入口；不运行自带Token示例，作品只能写到outputs对应run中。
+
+  - name: remotion-best-practices
+    source: https://github.com/remotion-dev/skills
+    source_subdir: skills/remotion-best-practices
+    commit: 30d4553ecd46fbc5212fd0ff006ae43af522158b
+    version: 4.0.539
+    license: 本次源码中未找到许可证文件；不将源码重新发布到本仓库。
+    entry: "~/.trae-cn/skills/remotion-best-practices/SKILL.md"
+    install_scope: global_cn
+    status: installed_source_not_runtime_verified
+    validation: 144个源文件的路径和SHA256与固定版本源码一致；入口引用的本地文件存在。
+    used_in_cases: [T1]
+    requirements: [Node, npm, React, Remotion, 浏览器]
+    execution_rule: 本次仅准备源码；正式任务在对应run内创建工程并固定package-lock，不启动示例或Studio。
+
+  - name: motion-design-skill
+    source: null
+    status: needs_original_source
+    entry: null
+    used_in_cases: [T1]
+    note: 场景文档只给名称，没有仓库链接；下方是候选，不作为已确认原版。
+    candidate:
+      source: https://github.com/LottieFiles/motion-design-skill
+      source_subdir: skills/motion-design
+      commit: f9a8a041b85185ee4881b3471d3415e939aac772
+      license: MIT
+      status: verified_repository_not_installed

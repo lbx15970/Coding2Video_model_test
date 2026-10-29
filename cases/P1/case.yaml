@@ -1,0 +1,35 @@
+id: P1
+title: 一个形状变遍所有UI的卡拍循环动效
+goal: 测试12种UI状态连续形变、音乐卡拍和首尾无缝循环。
+source:
+  document: https://flova-team.feishu.cn/docx/Ls5Gdp6SworOVoxUQXvcQPMInYd
+  case: P1
+  prompt_kind: adapted
+  completeness: 场景与direction已读取；原长prompt后续细项未完整读取。
+preparation:
+  status: needs_inputs
+  required_files:
+    - {path: assets/refs/P1_music.wav, purpose: 约120BPM可使用的音乐}
+  required_skills: []
+  pending: [补充音乐, 补齐原prompt的细项及帧率, 确认Geist字体文件]
+inputs:
+  refs: [assets/refs/P1_music.wav]
+  ui_states: [按钮, 加载, 对勾, 灵动岛, 音乐播放器, 进度条, 音量滑块, 开关, 标签页, 图表, ⌘K搜索, 弹窗提示]
+target:
+  video: null
+  reference_links: [https://x.com/twoclipping/status/2103273003555402193]
+prompt_file: prompt.md
+output_spec:
+  kind: video
+  duration_s: 14
+  resolution: 1440x1440
+  fps: null
+  format: mp4
+  bpm: 120
+  audio: 使用输入音乐
+protocol:
+  mode: multi_turn
+  checkpoints: [输入与节拍时间线确认, 形变和循环预览, 完整片]
+evals:
+  must_have: [12个UI状态顺序正确, 始终是同一元素形变, 光标点击和拖动驱动, 一镜到底, 首尾循环连续, 关键动作对齐音乐节拍]
+  must_not: [硬切替换元素, 弹跳过度, 粒子爆发, 发光, UI表面渐变, 图标线宽不一致, 空转等待]
