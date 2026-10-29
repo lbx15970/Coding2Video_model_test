@@ -1,5 +1,5 @@
 # 密钥
-models/*/.env
+models/.env
 .env
 *.pem
 

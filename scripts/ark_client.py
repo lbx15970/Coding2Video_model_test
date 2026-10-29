@@ -43,25 +43,22 @@ def load_env(path: Path) -> dict[str, str]:
     return out
 
 
-def load_config(path: Path) -> dict[str, str]:
-    """只解析 `key: value` 与一层嵌套，够用即可，不引 PyYAML。"""
-    cfg: dict[str, str] = {}
+def load_model_cfg(path: Path, model: str) -> dict[str, str]:
+    """解析 models/models.yaml：一级 key 是模型名，二级是 `k: v`。不引 PyYAML。"""
+    cfg: dict[str, dict[str, str]] = {}
     section = ""
     for raw in path.read_text(encoding="utf-8").splitlines():
         if not raw.strip() or raw.lstrip().startswith("#"):
             continue
         indent = len(raw) - len(raw.lstrip())
         k, _, v = raw.strip().partition(":")
-        v = v.split("#")[0].strip()
+        v = v.split(" #")[0].strip()
         if indent == 0:
-            section = ""
-            if v:
-                cfg[k] = v
-            else:
-                section = k
+            section = "" if v else k
+            cfg.setdefault(section, {})
         elif section and v:
-            cfg[f"{section}.{k}"] = v
-    return cfg
+            cfg[section][k] = v
+    return cfg.get(model, {})
 
 
 def build_messages(prompt: str, images: list[Path]) -> list[dict]:
@@ -111,7 +108,7 @@ def save_code(content: str, code_dir: Path) -> list[str]:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--run", required=True, help="已存在的 run_id（先跑 new_run.py）")
-    ap.add_argument("--model", default="seed-evolving", help="models/ 下目录名")
+    ap.add_argument("--model", default="seed-evolving", help="models/models.yaml 里的模型 key")
     ap.add_argument("--prompt-file", default="", help="prompt 文件路径")
     ap.add_argument("--prompt", default="", help="直接给 prompt")
     ap.add_argument("--image", action="append", default=[], help="参考图片，可多次")
@@ -123,16 +120,16 @@ def main() -> int:
         print(f"run 目录不存在：{run_dir}（先用 scripts/new_run.py 建）", file=sys.stderr)
         return 1
 
-    cfg_path = ROOT / "models" / args.model / "config.yaml"
-    cfg = load_config(cfg_path)
-    env = load_env(ROOT / "models" / args.model / ".env")
+    cfg_path = ROOT / "models" / "models.yaml"
+    cfg = load_model_cfg(cfg_path, args.model)
+    env = load_env(ROOT / "models" / ".env")
 
     endpoint = cfg.get("model", "")
     base_url = cfg.get("base_url", "").rstrip("/")
     key_name = cfg.get("api_key_env", "ARK_API_KEY")
     key = env.get(key_name) or os.environ.get(key_name, "")
     if not (endpoint and base_url and key):
-        print(f"缺少 endpoint/base_url/api_key，检查 {cfg_path} 与 models/{args.model}/.env",
+        print(f"缺少 endpoint/base_url/api_key，检查 models/models.yaml 与 models/.env",
               file=sys.stderr)
         return 1
 
@@ -144,13 +141,15 @@ def main() -> int:
         "messages": build_messages(prompt, images),
         "stream": False,
     }
-    for k in ("temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"):
-        if f"generation_params.{k}" in cfg:
-            body[k] = float(cfg[f"generation_params.{k}"])
+    for k in ("temperature", "top_p", "frequency_penalty", "presence_penalty"):
+        if k in cfg:
+            body[k] = float(cfg[k])
+    if "max_tokens" in cfg:
+        body["max_tokens"] = int(cfg["max_tokens"])
     body.update(json.loads(args.params) if args.params else {})
 
-    timeout = int(float(cfg.get("limits.timeout_s", 180)))
-    retries = int(float(cfg.get("limits.max_retries", 2)))
+    timeout = int(float(cfg.get("timeout_s", 180)))
+    retries = int(float(cfg.get("max_retries", 2)))
 
     logs = run_dir / "logs"
     (logs / "request.json").write_text(json.dumps(body, ensure_ascii=False, indent=2),

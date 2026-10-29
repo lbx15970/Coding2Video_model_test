@@ -1,0 +1,23 @@
+# 模型总表（唯一入口，新增模型在此加一段）
+# 参数为默认值，单次任务可通过 ark_client.py --params 覆盖，覆盖值会写进 run_meta.json
+
+claude-opus-5.5:
+  display_name: Claude Opus 5.5
+  access: ide_builtin          # 走本 IDE 内置能力，无 endpoint
+  model_version: 待回填          # 记录 IDE 实际版本号，保证可复现
+  temperature: 0.7
+  max_tokens: 8192
+
+seed-evolving:
+  display_name: Doubao-Seed-Evolving
+  access: ark_api
+  model: ep-20260812154547-t8rmk
+  model_version: doubao-seed-evolving-latest-version   # 2026-10-29 冒烟响应回报
+  base_url: https://ark.cn-beijing.volces.com/api/v3
+  api_key_env: ARK_API_KEY
+  temperature: 0.7
+  top_p: 0.95
+  max_tokens: 8192
+  timeout_s: 180
+  max_retries: 2
+  official_doc: https://docs.volcengine.com/docs/ark/latest-model?lang=zh

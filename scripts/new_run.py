@@ -17,7 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RUNS_MD = ROOT / "runs" / "RUNS.md"
 OUTPUTS = ROOT / "outputs"
-RUN_SUBDIRS = ("videos", "code", "frames", "logs")
+RUN_SUBDIRS = ("videos", "code", "logs")
 
 
 def slug(text: str) -> str:
@@ -48,7 +48,7 @@ def main() -> int:
         "note": args.note,
         "params_override": override,
         "inputs": refs,
-        "outputs": {"videos": [], "code": [], "frames": []},
+        "outputs": {"videos": [], "code": []},
         "model_version_reported": None,
         "status": "created",
         "conclusion": "",

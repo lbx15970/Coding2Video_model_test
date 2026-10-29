@@ -1,31 +1,23 @@
 # 用例模板：复制 cases/_template 为 cases/<case-id>/ 后填写
 id: case-001
 title: 占位标题
-goal: 一句话说明这条用例要验证什么
-source: 客户提供 / 自造          # 客户素材需注明来源与授权
-difficulty: easy|medium|hard
+goal: 这条用例验证什么
+source: 客户提供 / 自造
 
 inputs:
-  videos: []                     # cases/<id>/inputs/videos/ 下的相对路径
-  audio: []
-  images: []
-  shared: []                     # 引用 assets/refs/ 的公共素材
-
+  refs: []                        # cases/<id>/inputs/ 下的文件，或用 assets/refs/ 的公共素材
 target:
-  video: assets/targets/<filename>   # 优秀目标视频
+  video: cases/<id>/targets/xxx.mp4   # 或 assets/targets/xxx.mp4
   why_good: 目标好在哪（构图/节奏/转场/信息密度）
-  derived_from: 该目标是客户实拍、竞品还是生成
 
 prompt_file: prompt.md
 
-output_spec:                     # 生成视频的硬约束，写进 prompt
+output_spec:
   duration_s: 15
   resolution: 1080x1920
   fps: 30
-  aspect: 9:16
   format: mp4
 
 evals:
-  must_have: []                  # 必须出现的信息点
-  must_not: []                   # 禁止出现的（水印/错字/版权素材）
-  rubric: 见 evals/README 说明
+  must_have: []                   # 必须出现的信息点
+  must_not: []                    # 禁止出现（水印/错字/版权素材）

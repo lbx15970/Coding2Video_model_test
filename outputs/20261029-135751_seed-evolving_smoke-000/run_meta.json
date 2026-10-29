@@ -15,8 +15,7 @@
       "outputs/20261029-135751_seed-evolving_smoke-000/code/generated_04.sh",
       "outputs/20261029-135751_seed-evolving_smoke-000/code/generated_05.txt",
       "outputs/20261029-135751_seed-evolving_smoke-000/code/generated_06.sh"
-    ],
-    "frames": []
+    ]
   },
   "model_version_reported": "doubao-seed-evolving-latest-version",
   "status": "generated",
