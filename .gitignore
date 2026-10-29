@@ -1,0 +1,23 @@
+# 密钥
+models/*/.env
+.env
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# 大媒体文件默认不入库（确需入库请改用 Git LFS 并逐条放开）
+assets/**/*.mp4
+assets/**/*.mov
+assets/**/*.wav
+assets/**/*.mp3
+assets/**/*.png
+assets/**/*.jpg
+outputs/**/videos/*.mp4
+outputs/**/frames/*

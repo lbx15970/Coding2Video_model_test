@@ -1,0 +1,20 @@
+{
+  "model": "ep-20260812154547-t8rmk",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "用 python(matplotlib) 写一个 3 秒柱状图增长动画并输出 smoke_v1.mp4，给出完整可运行代码和渲染命令。"
+        }
+      ]
+    }
+  ],
+  "stream": false,
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "max_tokens": 900,
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0
+}

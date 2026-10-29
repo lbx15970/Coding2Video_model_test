@@ -1,0 +1,9 @@
+# 运行台账（唯一事实来源）
+
+> 规则：每次任务由 `scripts/new_run.py` 自动追加一行；手工补「结论」时不要改已有行的时间与 run_id。
+> 时间格式统一 `YYYY-MM-DD HH:MM:SS`（Asia/Shanghai）；run_id 格式 `YYYYMMDD-HHMMSS_<model>_<case>`。
+
+| 时间 | run_id | 模型 | 用例 | 关键输入 | 输出目录 | 状态 | 结论 |
+|---|---|---|---|---|---|---|---|
+| 2026-10-29 12:21:00 | 20261029-122100_init_project | - | 项目初始化 | 无 | 仓库根目录 | done | 建立目录骨架、模型登记、任务台账与同步校验脚本 |
+| 2026-10-29 13:57:51 | 20261029-135751_seed-evolving_smoke-000 | seed-evolving | smoke-000 | - | outputs/20261029-135751_seed-evolving_smoke-000/ | done | 连通性 OK，实际版本 doubao-seed-evolving-latest-version；2401 tokens（其中 reasoning 1551），成功抽出 6 段代码。视频未渲染，仅验证链路 |

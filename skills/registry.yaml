@@ -1,0 +1,13 @@
+# 已引入的互联网 Skill（总表）
+# 新增一条后，同步在 skills/<name>/ 放代码，并更新 README 的 skills 说明
+version: 1
+updated_at: 2026-10-29
+skills: []
+# 示例：
+# - name: manim-video
+#   source: https://github.com/xxx/manim-video-skill
+#   version: v0.3.1
+#   license: MIT
+#   entry: skills/manim-video/SKILL.md
+#   used_in_cases: [case-001]
+#   risk: 本地执行 ffmpeg/manim，无外发
